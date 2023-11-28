@@ -8,8 +8,5 @@ const connection = mysql.createConnection({
     database: 'movie_store'
 });
 
-// Create the database
-connection.query('CREATE DATABASE movie_store');
-connection.query('CREATE TABLE users')
 // Close the connection
 connection.end();
