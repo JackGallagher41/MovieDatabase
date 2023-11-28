@@ -1,5 +1,5 @@
 // THIS FILE BUILDS THE MYSQL DATABASE WHEN RUN
-// IF INCOMPATIBLE ERROR RUN THIS IN MYSQL ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+// IF INCOMPATIBLE ERROR RUN THIS IN MYSQL: ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 const mysql = require('mysql');
 
 // Connect to the database

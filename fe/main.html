@@ -3,9 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Store</title>
-    <p>MOVIE STORE HOME PAGE</p>
+    <style>
+        /* CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .movie {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <!-- Add links to other pages -->
+    </nav>
+    <h1>Welcome to the Movie Store</h1>
+</header>
 
+<main>
+    <section>
+        <h2>About Us</h2>
+        <p>Welcome to our movie store! We provide a wide selection of movies...</p>
+        <div class="movie-container" id="movieList"></div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2023 Movie Store. All Rights Reserved.</p>
+</footer>
+
+<script src="/be/main.js"></script>
 </body>
 </html>

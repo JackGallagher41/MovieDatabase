@@ -1,12 +1,15 @@
-const mysql = require('mysql');
+window.onload = function() {
+    fetch('http://localhost:3000/movies')
 
-// Connect to the database
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'moviestore'
-});
-
-// Close the connection
-connection.end();
+        .then(response => response.json())
+        .then(data => {
+            const movieContainer = document.getElementById('movieList');
+            data.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.classList.add('movie');
+                movieDiv.innerHTML = `<h3>${movie.title}</h3><p>Director: ${movie.director}</p>`;
+                movieContainer.appendChild(movieDiv);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+};
