@@ -3,9 +3,9 @@ const mysql = require('mysql');
 // Connect to the database
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'user',
+    user: 'root',
     password: 'password',
-    database: 'movie_store'
+    database: 'moviestore'
 });
 
 // Close the connection
