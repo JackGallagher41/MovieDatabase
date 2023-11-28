@@ -36,6 +36,7 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.movies (
   genre VARCHAR(50),
   release_date DATE,
   director VARCHAR(100),
+  image LONGBLOB,
   PRIMARY KEY (movie_id)
 )`, function(error, results, fields) {
     if (error) throw error;
@@ -58,6 +59,19 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.reviews (
     console.log('Table reviews created successfully');
 });
 
+// Insert Movies
+connection.query(`
+    INSERT INTO movies (title, genre, release_date, director, image)
+    VALUES 
+        ('Inception', 'Sci-Fi', '2010-07-16', 'Christopher Nolan', 'inception.jpg'),
+        ('The Shawshank Redemption', 'Drama', '1994-09-23', 'Frank Darabont', 'shawshank_redemption.jpg'),
+        ('The Dark Knight', 'Action', '2008-07-18', 'Christopher Nolan', 'dark_knight.jpg'),
+        ('Pulp Fiction', 'Crime', '1994-10-14', 'Quentin Tarantino', 'pulp_fiction.jpg'),
+        ('Iron Man', 'Action', '2008-05-02', 'Jon Favreau', 'iron_man.jpg');
+`, function(error, results, fields) {
+    if (error) throw error;
+    console.log('Movies inserted successfully');
+});
 
 // Close the connection
 connection.end();
