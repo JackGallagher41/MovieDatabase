@@ -8,52 +8,120 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f3f3f3;
         }
 
-        header, footer {
-            background-color: #333;
+        header {
+            background-color: #232f3e;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
         }
 
-        main {
-            padding: 20px;
+        header h1 {
+            font-style: italic;
+            margin: 0;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow */
         }
 
-        nav {
-            background-color: #444;
-            padding: 10px;
+        header nav {
+            text-align: center;
+            margin-top: 15px;
         }
 
         nav a {
             color: #fff;
             text-decoration: none;
-            margin-right: 15px;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        nav a:hover {
+            color: #ffd700; /* Change color on hover */
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center; /* Center the search bar */
+        }
+
+        .search-bar input[type="text"],
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .main {
+            padding: 20px; /* Adding padding for spacing */
+        }
+
+        .movie {
+            width: calc(25% - 20px); /* Adjusted width for smaller movies */
+            margin: 0 10px 20px; /* Bottom margin and small side margins */
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+            border-radius: 8px; /* Rounded corners */
+            transition: transform 0.3s ease; /* Smooth transition on hover */
+        }
+
+        .movie:hover {
+            transform: translateY(-5px); /* Move up on hover */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+        }
+
+        .movie img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px; /* Rounded corners for images */
         }
 
         .movie-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: space-around; /* Adjust alignment */
+            padding: 20px 0;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #232f3e;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
         }
     </style>
 </head>
 <body>
 <header>
+    <h1>Movie Store</h1>
     <nav>
         <a href="main.html">Home</a>
         <a href="reviews.html">Reviews</a>
         <!-- Add links to other pages -->
     </nav>
-    <h1>Welcome to the Movie Store</h1>
 </header>
 
 <main>
-    <section>
-        <h2>About Us</h2>
-        <p>Welcome to our movie store! We provide a wide selection of movies...</p>
+    <section class="main">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search..." oninput="filterMovies()">
+            <button onclick="filterMovies()">Filter</button>
+        </div>
         <div class="movie-container" id="movieList"></div>
     </section>
 </main>
