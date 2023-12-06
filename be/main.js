@@ -7,17 +7,25 @@ window.onload = function() {
                 const movieDiv = document.createElement('div');
                 movieDiv.classList.add('movie');
 
+                // Create an image element
                 const movieImage = document.createElement('img');
                 movieImage.src = `/assets/images/movies/${movie.image}`;
                 movieImage.style.width = '100%';
                 movieImage.style.height = 'auto';
 
+                // Create an anchor tag to make the movie clickable
+                const movieLink = document.createElement('a');
+                movieLink.href = `info.html?movie_id=${movie.movie_id}`; // Include the movie_id as a parameter
+
+                // Create a div for movie details
                 const movieDetails = document.createElement('div');
                 movieDetails.classList.add('movie-details');
 
+                // Add movie title
                 const title = document.createElement('h3');
                 title.textContent = movie.title;
 
+                // Add director
                 const director = document.createElement('p');
                 director.textContent = `Director: ${movie.director}`;
 
@@ -32,6 +40,10 @@ window.onload = function() {
                 movieDiv.appendChild(movieImage);
                 movieDiv.appendChild(movieDetails);
 
+                movieLink.appendChild(movieImage);
+                movieLink.appendChild(movieDetails);
+
+                movieDiv.appendChild(movieLink);
                 movieContainer.appendChild(movieDiv);
             });
         })
