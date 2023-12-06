@@ -13,6 +13,10 @@ window.onload = function() {
                 movieImage.style.width = '100%';
                 movieImage.style.height = 'auto';
 
+                // Create an anchor tag to make the movie clickable
+                const movieLink = document.createElement('a');
+                movieLink.href = `info.html?movie_id=${movie.movie_id}`; // Include the movie_id as a parameter
+
                 // Create a div for movie details
                 const movieDetails = document.createElement('div');
                 movieDetails.classList.add('movie-details');
@@ -31,6 +35,10 @@ window.onload = function() {
                 movieDiv.appendChild(movieImage);
                 movieDiv.appendChild(movieDetails);
 
+                movieLink.appendChild(movieImage);
+                movieLink.appendChild(movieDetails);
+
+                movieDiv.appendChild(movieLink);
                 movieContainer.appendChild(movieDiv);
             });
         })
