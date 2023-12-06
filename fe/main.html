@@ -5,10 +5,12 @@
     <title>Movie Store</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f3f3f3;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Set minimum height of the body */
         }
 
         header {
@@ -55,15 +57,16 @@
             margin-right: 10px;
         }
 
-        .main {
-            padding: 20px; /* Adding padding for spacing */
+        main {
+            flex-grow: 1; /* Allow main to grow */
+            overflow-y: auto; /* Add scroll to main */
         }
 
         .movie {
-            width: calc(25% - 20px); /* Adjusted width for smaller movies */
+            width: calc(15% - 20px); /* Adjusted width for six movies per row */
             margin: 0 10px 20px; /* Bottom margin and small side margins */
             border: 1px solid #ccc;
-            padding: 20px;
+            padding: 10px; /* Adjusted padding */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -73,36 +76,49 @@
             transition: transform 0.3s ease; /* Smooth transition on hover */
         }
 
-        .movie:hover {
-            transform: translateY(-5px); /* Move up on hover */
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-        }
-
         .movie img {
             width: 100%;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Adjusted margin */
             border-radius: 8px; /* Rounded corners for images */
+        }
+
+        .movie-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 10px; /* Adjusted padding */
+        }
+
+        .movie p {
+            margin: 5px 0; /* Adjusted margin */
+        }
+
+        .movie p.price {
+            margin-top: auto;
+            font-weight: bold;
         }
 
         .movie-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around; /* Adjust alignment */
+            justify-content: space-between; /* Distribute evenly */
             padding: 20px 0;
-            max-height: 500px;
-            overflow-y: auto;
+            max-height: calc(100vh - 200px); /* Extend height till footer */
         }
 
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: #232f3e;
-            color: #fff;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            background-color: #fff; /* Changed footer background color */
+            color: #232f3e; /* Text color similar to movie details */
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+        }
+
+        .movie:hover {
+            transform: translateY(-5px); /* Move up on hover */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
         }
 
         .cart-button {
@@ -123,6 +139,53 @@
         /* Change button color on hover */
         .cart-button:hover {
             background-color: #e0bb00;
+        }
+        @media screen and (max-width: 1200px) {
+            .movie-container {
+                justify-content: space-around; /* Adjust spacing for smaller screens */
+                padding: 0 10px; /* Adjusted padding to center-align */
+            }
+            .movie {
+                margin: 10px;
+                flex-basis: calc(33.33% - 20px); /* Adjusted basis to ensure 3 movies per row */
+                max-width: calc(33.33% - 20px); /* Maintain a maximum width for consistency */
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .movie-container {
+                justify-content: space-between; /* Distribute evenly for smaller screens */
+                padding: 0 15px; /* Adjusted padding to center-align */
+            }
+            .movie {
+                margin: 15px;
+                flex-basis: calc(33.33% - 30px); /* Adjusted basis to ensure 3 movies per row */
+                max-width: calc(33.33% - 30px); /* Maintain a maximum width for consistency */
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .movie-container {
+                justify-content: space-between; /* Distribute evenly for smaller screens */
+                padding: 0 20px; /* Adjusted padding to center-align */
+            }
+            .movie {
+                margin: 20px;
+                flex-basis: calc(50% - 40px); /* Adjusted basis to ensure 2 movies per row */
+                max-width: calc(50% - 40px); /* Maintain a maximum width for consistency */
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .movie-container {
+                justify-content: space-between; /* Distribute evenly for smaller screens */
+                padding: 0 25px; /* Adjusted padding to center-align */
+            }
+            .movie {
+                margin: 25px;
+                flex-basis: calc(100% - 50px); /* Full width for smaller screens */
+                max-width: calc(100% - 50px); /* Maintain a maximum width for consistency */
+            }
         }
     </style>
 </head>

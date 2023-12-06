@@ -86,7 +86,17 @@ connection.query(`
         ('The Godfather', 'Crime', '1972-03-24', 'Francis Ford Coppola', 'the_godfather.jpg', 14.99),
         ('Forrest Gump', 'Drama', '1994-07-06', 'Robert Zemeckis', 'forrest_gump.jpg', 14.99),
         ('The Matrix', 'Sci-Fi', '1999-03-31', 'Lana Wachowski, Lilly Wachowski', 'the_matrix.jpg', 9.99),
-        ('The Lord of the Rings: The Fellowship of the Ring', 'Fantasy', '2001-12-19', 'Peter Jackson', 'lord_of_the_rings.jpg', 24.99);`, function(error, results, fields) {
+        ('The Lord of the Rings: The Fellowship of the Ring', 'Fantasy', '2001-12-19', 'Peter Jackson', 'lord_of_the_rings.jpg', 24.99),
+        ('The Silence of the Lambs', 'Thriller', '1991-02-14', 'Jonathan Demme', 'silence_of_the_lambs.jpg', 12.99),
+        ('The Social Network', 'Biography', '2010-10-01', 'David Fincher', 'the_social_network.jpg', 15.99),
+        ('The Departed', 'Crime', '2006-10-06', 'Martin Scorsese', 'the_departed.jpg', 9.99),
+        ('Gladiator', 'Action', '2000-05-05', 'Ridley Scott', 'gladiator.jpg', 19.99),
+        ('The Godfather: Part II', 'Crime', '1974-12-20', 'Francis Ford Coppola', 'the_godfather_2.jpg', 14.99),
+        ('Inglourious Basterds', 'War', '2009-08-21', 'Quentin Tarantino', 'inglourious_basterds.jpg', 14.99),
+        ('The Green Mile', 'Drama', '1999-12-10', 'Frank Darabont', 'the_green_mile.jpg', 9.99),
+        ('Fight Club', 'Drama', '1999-10-15', 'David Fincher', 'fight_club.jpg', 24.99),
+        ('The Dark Knight Rises', 'Action', '2012-07-20', 'Christopher Nolan', 'dark_knight_rises.jpg', 12.99),
+        ('The Amazing Spider-Man', 'Action', '2012-07-03', 'Marc Webb', 'the_amazing_spiderman.jpg', 24.99);`,function(error, results, fields) {
     if (error) throw error;
     console.log('Movies inserted successfully');
 });

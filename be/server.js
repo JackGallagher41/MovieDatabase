@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 app.get('/movies', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
-    connection.query('SELECT title, director, image FROM movies', (error, results, fields) => {
+    connection.query('SELECT title, director, image, price FROM movies', (error, results, fields) => {
         if (error) {
             console.error('Error fetching movies: ' + error.stack);
             res.status(500).send('Error fetching movies');
