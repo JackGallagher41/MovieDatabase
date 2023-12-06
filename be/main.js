@@ -4,7 +4,9 @@ window.onload = function() {
         .then(data => {
             const movieContainer = document.getElementById('movieList');
             data.forEach(movie => {
-                const movieDiv = document.createElement('div');
+                // Create an anchor tag for the entire movie object
+                const movieDiv = document.createElement('a');
+                movieDiv.href = `info.html?movie_id=${movie.movie_id}`; // Include the movie_id as a parameter
                 movieDiv.classList.add('movie');
 
                 // Create an image element
@@ -12,10 +14,6 @@ window.onload = function() {
                 movieImage.src = `/assets/images/movies/${movie.image}`;
                 movieImage.style.width = '100%';
                 movieImage.style.height = 'auto';
-
-                // Create an anchor tag to make the movie clickable
-                const movieLink = document.createElement('a');
-                movieLink.href = `info.html?movie_id=${movie.movie_id}`; // Include the movie_id as a parameter
 
                 // Create a div for movie details
                 const movieDetails = document.createElement('div');
@@ -40,10 +38,6 @@ window.onload = function() {
                 movieDiv.appendChild(movieImage);
                 movieDiv.appendChild(movieDetails);
 
-                movieLink.appendChild(movieImage);
-                movieLink.appendChild(movieDetails);
-
-                movieDiv.appendChild(movieLink);
                 movieContainer.appendChild(movieDiv);
             });
         })
@@ -57,7 +51,6 @@ function filterMovies() {
 
     Array.from(movies).forEach(movie => {
         const title = movie.getElementsByTagName('h3')[0];
-        const director = movie.getElementsByTagName('p')[0];
         const txtValue = title.textContent || title.innerText;
 
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
