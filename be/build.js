@@ -37,10 +37,25 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.movies (
   release_date DATE,
   director VARCHAR(100),
   image VARCHAR(50),
+  price DECIMAL(10, 2),
   PRIMARY KEY (movie_id)
 )`, function(error, results, fields) {
     if (error) throw error;
     console.log('Table movies created successfully');
+});
+
+//Create Carts table
+connection.query(`CREATE TABLE IF NOT EXISTS moviestore.carts (
+    cart_id INT AUTO_INCREMENT,
+    movie_id INT,
+    user_id INT,
+    quantity INT,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    PRIMARY KEY (cart_id)
+    )`, function(error, results, fields) {
+    if (error) throw error;
+    console.log('Table reviews created successfully');
 });
 
 // Create Reviews Table
@@ -61,17 +76,17 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.reviews (
 
 // Insert Movies
 connection.query(`
-    INSERT IGNORE INTO movies (title, genre, release_date, director, image)
+    INSERT IGNORE INTO movies (title, genre, release_date, director, image, price)
     VALUES 
-        ('Inception', 'Sci-Fi', '2010-07-16', 'Christopher Nolan', 'inception.jpg'),
-        ('The Shawshank Redemption', 'Drama', '1994-09-23', 'Frank Darabont', 'shawshank_redemption.jpg'),
-        ('The Dark Knight', 'Action', '2008-07-18', 'Christopher Nolan', 'dark_knight.jpg'),
-        ('Pulp Fiction', 'Crime', '1994-10-14', 'Quentin Tarantino', 'pulp_fiction.jpg'),
-        ('Iron Man', 'Action', '2008-05-02', 'Jon Favreau', 'iron_man.jpg'),
-        ('The Godfather', 'Crime', '1972-03-24', 'Francis Ford Coppola', 'the_godfather.jpg'),
-        ('Forrest Gump', 'Drama', '1994-07-06', 'Robert Zemeckis', 'forrest_gump.jpg'),
-        ('The Matrix', 'Sci-Fi', '1999-03-31', 'Lana Wachowski, Lilly Wachowski', 'the_matrix.jpg'),
-        ('The Lord of the Rings: The Fellowship of the Ring', 'Fantasy', '2001-12-19', 'Peter Jackson', 'lord_of_the_rings.jpg');`, function(error, results, fields) {
+        ('Inception', 'Sci-Fi', '2010-07-16', 'Christopher Nolan', 'inception.jpg', 12.99),
+        ('The Shawshank Redemption', 'Drama', '1994-09-23', 'Frank Darabont', 'shawshank_redemption.jpg', 15.99),
+        ('The Dark Knight', 'Action', '2008-07-18', 'Christopher Nolan', 'dark_knight.jpg', 9.99),
+        ('Pulp Fiction', 'Crime', '1994-10-14', 'Quentin Tarantino', 'pulp_fiction.jpg', 19.99),
+        ('Iron Man', 'Action', '2008-05-02', 'Jon Favreau', 'iron_man.jpg', 14.99),
+        ('The Godfather', 'Crime', '1972-03-24', 'Francis Ford Coppola', 'the_godfather.jpg', 14.99),
+        ('Forrest Gump', 'Drama', '1994-07-06', 'Robert Zemeckis', 'forrest_gump.jpg', 14.99),
+        ('The Matrix', 'Sci-Fi', '1999-03-31', 'Lana Wachowski, Lilly Wachowski', 'the_matrix.jpg', 9.99),
+        ('The Lord of the Rings: The Fellowship of the Ring', 'Fantasy', '2001-12-19', 'Peter Jackson', 'lord_of_the_rings.jpg', 24.99);`, function(error, results, fields) {
     if (error) throw error;
     console.log('Movies inserted successfully');
 });
