@@ -43,55 +43,8 @@
             color: #ffd700; /* Change color on hover */
         }
 
-        .search-bar {
-            margin-bottom: 20px;
-            text-align: center; /* Center the search bar */
-        }
-
-        .search-bar input[type="text"],
-        .search-bar button {
-            padding: 10px;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-
         .main {
             padding: 20px; /* Adding padding for spacing */
-        }
-
-        .movie {
-            width: calc(25% - 20px); /* Adjusted width for smaller movies */
-            margin: 0 10px 20px; /* Bottom margin and small side margins */
-            border: 1px solid #ccc;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
-            border-radius: 8px; /* Rounded corners */
-            transition: transform 0.3s ease; /* Smooth transition on hover */
-        }
-
-        .movie:hover {
-            transform: translateY(-5px); /* Move up on hover */
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-        }
-
-        .movie img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 8px; /* Rounded corners for images */
-        }
-
-        .movie-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around; /* Adjust alignment */
-            padding: 20px 0;
-            max-height: 500px;
-            overflow-y: auto;
         }
 
         footer {
@@ -128,7 +81,7 @@
 </head>
 <body>
 <header>
-    <h1>Movie Store</h1>
+    <h1>Movie Store - Cart</h1>
     <nav>
         <a href="main.html">Home</a>
         <a href="reviews.html">Reviews</a>
@@ -140,11 +93,6 @@
 
 <main>
     <section class="main">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search..." oninput="filterMovies()">
-            <button onclick="filterMovies()">Filter</button>
-        </div>
-        <div class="movie-container" id="movieList"></div>
     </section>
 </main>
 
