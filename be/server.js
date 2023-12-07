@@ -178,6 +178,68 @@ app.post('/users', (req, res) => {
     });
 });
 
+app.get('/carts/:user_id', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+    const userId = req.params.user_id;
+    console.log("test");
+    if (!userId) {
+        res.status(400).send('User ID is missing');
+        return;
+    }
+
+    const query = `
+        SELECT carts.cart_id, movies.title, movies.price, carts.quantity
+        FROM carts
+        JOIN movies ON carts.movie_id = movies.movie_id
+        WHERE carts.user_id = ?;
+    `;
+    console.log(query);
+    connection.query(query, [userId], (error, results, fields) => {
+        if (error) {
+            console.error('Error fetching cart items: ' + error.stack);
+            res.status(500).send('Error fetching cart items');
+            return;
+        }
+
+        res.json(results);
+    });
+});
+
+app.delete('/carts/:cart_id', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+    const cartId = req.params.cart_id;
+
+    connection.query('DELETE FROM carts WHERE cart_id = ?', [cartId], (error, results, fields) => {
+        if (error) {
+            console.error('Error deleting item from cart: ' + error.stack);
+            res.status(500).send('Error deleting item from cart');
+            return;
+        }
+        res.status(200).send('Item deleted from cart successfully');
+    });
+});
+
+app.delete('/carts/purchase/:user_id', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+    const userId = req.params.user_id;
+
+    if (!userId) {
+        res.status(400).send('User ID is missing');
+        return;
+    }
+
+    const query = 'DELETE FROM carts WHERE user_id = ?';
+
+    connection.query(query, [userId], (error, results, fields) => {
+        if (error) {
+            console.error('Error deleting carts: ' + error.stack);
+            res.status(500).send('Error deleting carts');
+            return;
+        }
+
+        res.status(200).send('All items purchased successfully');
+    });
+});
 
 app.listen(3000, () => {
     console.log('App listening on port 3000');

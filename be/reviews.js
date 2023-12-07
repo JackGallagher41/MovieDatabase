@@ -1,3 +1,7 @@
+function getUserIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('user_id');
+}
 window.onload = function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -129,3 +133,14 @@ window.onload = function() {
             .catch(error => console.error('Error creating review:', error));
     };
 };
+
+function goToCart() {
+    const userid = getUserIdFromUrl();
+
+    if (userid) {
+        const cartLink = `cart.html?user_id=${userid}`;
+        location.href = cartLink;
+    } else {
+        console.error('User_id not found in the URL');
+    }
+}

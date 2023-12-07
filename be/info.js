@@ -1,3 +1,7 @@
+function getUserIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('user_id');
+}
 window.onload = function() {
     // Get the movie_id from the URL parameter
     const params = new URLSearchParams(window.location.search);
@@ -42,9 +46,35 @@ window.onload = function() {
             const addToCartButton = document.createElement('button');
             addToCartButton.textContent = 'Add to Cart';
             addToCartButton.classList.add('add-to-cart-button');
+
             addToCartButton.addEventListener('click', function() {
-                // Implement your add to cart logic here
-                console.log(`Added ${movie.title} to the cart!`);
+                const urlParams = new URLSearchParams(window.location.search);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        movie_id: urlParams.get('movie_id'),
+                        user_id: urlParams.get('user_id'),
+                    }),
+                };
+
+                fetch('http://localhost:3000/add-to-cart', requestOptions)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Handle the response from the server as needed
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Handle errors here
+                    });
             });
 
             movieDiv.appendChild(movieImage);
@@ -59,3 +89,21 @@ window.onload = function() {
         })
         .catch(error => console.error('Error:', error));
 };
+function goToCart() {
+    const userid = getUserIdFromUrl();
+
+    if (userid) {
+        const cartLink = `cart.html?user_id=${userid}`;
+        location.href = cartLink;
+    } else {
+        console.error('User_id not found in the URL');
+    }
+}
+
+function goToMain() {
+    const userid = getUserIdFromUrl();
+    if (userid) {
+        const mainLink = `main.html?user_id=${userid}`
+        location.href=mainLink;
+    }
+}

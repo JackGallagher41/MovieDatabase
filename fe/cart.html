@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Store</title>
+    <title>Movie Store - Cart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,14 +16,14 @@
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             font-style: italic;
             margin: 0;
             font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header nav {
@@ -31,20 +31,20 @@
             margin-top: 15px;
         }
 
-        nav a {
+        nav button {
             color: #fff;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 18px;
-            transition: color 0.3s ease; /* Smooth color transition */
+            background-color: #232f3e;
         }
 
-        nav a:hover {
-            color: #ffd700; /* Change color on hover */
+        nav button:hover {
+            color: #ffd700;
         }
 
         .main {
-            padding: 20px; /* Adding padding for spacing */
+            padding: 20px;
+            text-align: center;
         }
 
         footer {
@@ -55,27 +55,67 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .cart-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ffd700;
-            color: #000000;
-            padding: 10px 15px;
+        .cart-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item-details {
+            flex: 2;
+        }
+
+        .cart-item h3 {
+            margin: 0;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+        }
+
+        .cart-item img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
             border: none;
+            padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
         }
 
-        /* Change button color on hover */
-        .cart-button:hover {
-            background-color: #e0bb00;
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        .purchase-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .purchase-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .purchase-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -83,20 +123,22 @@
 <header>
     <h1>Movie Store - Cart</h1>
     <nav>
-        <a href="main.html">Home</a>
+        <button onclick="goToMain()">Home</button>
     </nav>
-    <button class="cart-button" onclick="location.href='cart.html'">Cart</button>
 </header>
 
-<main>
-    <section class="main">
-    </section>
+<main class="main" id="cartItemsContainer">
+    <!-- Cart items will be displayed here dynamically -->
 </main>
+
+<div class="purchase-button-container">
+    <button class="purchase-button" id="purchaseButton">Purchase All</button>
+</div>
 
 <footer>
     <p>&copy; 2023 Movie Store. All Rights Reserved.</p>
 </footer>
 
-<script src="/be/main.js"></script>
+<script src="/be/cart.js"></script>
 </body>
 </html>
