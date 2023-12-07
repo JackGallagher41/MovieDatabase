@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 app.get('/movies', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
-    connection.query('SELECT title, director, image, price FROM movies', (error, results, fields) => {
+    connection.query('SELECT movie_id, title, director, image, price FROM movies', (error, results, fields) => {
         if (error) {
             console.error('Error fetching movies: ' + error.stack);
             res.status(500).send('Error fetching movies');
@@ -23,6 +23,33 @@ app.get('/movies', (req, res) => {
         }
         res.json(results);
     });
+});
+
+app.get('/movies_with_id/:id', (req, res) => {
+    const movieId = req.params.id;
+
+    // Use a parameterized query to prevent SQL injection
+    connection.query(
+        'SELECT * FROM movies WHERE movie_id = ?',
+        [movieId],
+        (error, results, fields) => {
+            if (error) {
+                console.error('Error fetching movie details: ' + error.stack);
+                res.status(500).send('Error fetching movie details');
+                return;
+            }
+
+            // Check if any results were found
+            if (results.length === 0) {
+                console.log('Movie not found');
+                res.status(404).send('Movie not found');
+                return;
+            }
+
+            // Send the details of the found movie
+            res.json(results[0]);
+        }
+    );
 });
 
 app.post('/add-to-cart', (req, res) => {
