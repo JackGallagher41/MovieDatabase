@@ -127,7 +127,7 @@ app.post('/reviews', (req, res) => {
         res.json({ message: 'Review created successfully', review_id: results.insertId });
     });
 });
-
+// GET BY USER ID
 app.get('/users', (req, res) => {
     const userId = req.query.user_id; // Extract userId from request query parameters
 
@@ -148,6 +148,34 @@ app.get('/users', (req, res) => {
         res.json(results);
     });
 
+});
+// LIST USERS
+app.get('/list-users', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+    connection.query('SELECT username, password, email, user_id FROM users', (error, results, fields) => {
+        if (error) {
+            console.error('Error fetching movies: ' + error.stack);
+            res.status(500).send('Error fetching movies');
+            return;
+        }
+        res.json(results);
+    });
+});
+//CREATE USER
+app.post('/users', (req, res) => {
+    const { username, email, password } = req.body;
+
+    const query = `INSERT INTO users (username, email, password) 
+                   VALUES (?, ?, ?)`;
+
+    connection.query(query, [username, email, password], (error, results, fields) => {
+        if (error) {
+            console.error('Error creating user:', error.stack);
+            res.status(500).send('Error creating user');
+            return;
+        }
+        res.json({ message: 'User created successfully', user_id: results.insertId });
+    });
 });
 
 

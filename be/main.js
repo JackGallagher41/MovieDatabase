@@ -1,4 +1,24 @@
 window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('user_id'); // Extract the user ID from the URL parameter
+    // Check if user_id is present
+    if (!userId) {
+        console.error('User ID is missing in the URL');
+        return;
+    }
+
+    // Get all the links in the document
+    const allLinks = document.querySelectorAll('a');
+
+    // Loop through each link and append the user ID to its href attribute
+    allLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.includes('?')) {
+            link.setAttribute('href', `${href}&user_id=${userId}`);
+        } else {
+            link.setAttribute('href', `${href}?user_id=${userId}`);
+        }
+    });
     fetch('http://localhost:3000/movies')
         .then(response => response.json())
         .then(data => {

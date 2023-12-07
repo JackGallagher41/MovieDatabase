@@ -2,11 +2,35 @@ window.onload = function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const movieId = urlParams.get('movie_id');
+    const userId = urlParams.get('user_id');
 
     if (!movieId) {
         console.error('Movie ID not found in URL');
         return;
     }
+
+    fetch(`http://localhost:3000/reviews?movie_id=${movieId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            return response.json();
+        })
+        .then(reviews => {
+            // rest of your code for displaying reviews
+
+            // Appending user_id to links
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes('?')) {
+                    link.setAttribute('href', `${href}&user_id=${userId}`);
+                } else {
+                    link.setAttribute('href', `${href}?user_id=${userId}`);
+                }
+            });
+        })
+        .catch(error => console.error('Error:', error));
 
     fetch(`http://localhost:3000/reviews?movie_id=${movieId}`)
         .then(response => {
