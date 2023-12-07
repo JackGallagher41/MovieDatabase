@@ -147,6 +147,61 @@
         .cart-button:hover {
             background-color: #e0bb00;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        .reviews-button {
+            background-color: #000; /* Darker background color */
+            color: #fff; /* Text color */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Add transitions */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow */
+        }
+
+        /* Change button color on hover */
+        .reviews-button:hover {
+            background-color: #333; /* Darken on hover */
+            transform: translateY(-3px); /* Move up on hover */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+        }
+
+        .reviews-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .review-item {
+            margin-bottom: 10px;
+        }
         @media screen and (max-width: 1200px) {
             .movie-container {
                 justify-content: space-around; /* Adjust spacing for smaller screens */
@@ -215,6 +270,10 @@
             <button onclick="filterMovies()">Filter</button>
         </div>
         <div class="movie-container" id="movieList"></div>
+        <div id="reviewsModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="reviewsContent" class="reviews-content"></div>
+        </div>
     </section>
 </main>
 

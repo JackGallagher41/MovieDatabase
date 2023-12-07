@@ -5,6 +5,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 app.use(cors());
+app.use(express.json()); // Using built-in JSON middleware of Express
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -91,6 +92,62 @@ app.post('/add-to-cart', (req, res) => {
             });
         }
     });
+});
+app.get('/reviews', (req, res) => {
+    console.log('Request to /reviews endpoint'); // Log to check if endpoint is hit
+
+    const movieId = req.query.movie_id; // Extract movie_id from query parameter
+
+    // Construct the SQL query to fetch reviews filtered by movie ID
+    const query = 'SELECT review_id, movie_id, user_id, rating, review_text, review_date FROM reviews WHERE movie_id = ?';
+
+    connection.query(query, [movieId], (error, results, fields) => {
+        if (error) {
+            console.error('Error fetching reviews: ' + error.stack);
+            res.status(500).send('Error fetching reviews');
+            return;
+        }
+        console.log('Fetched reviews:', results); // Log the fetched reviews
+        res.json(results);
+    });
+});
+
+app.post('/reviews', (req, res) => {
+    const { user_id, movie_id, rating, review_text, review_date } = req.body;
+
+    const query = `INSERT INTO reviews (user_id, movie_id, rating, review_text, review_date) 
+                   VALUES (${user_id}, ${movie_id}, ${rating}, '${review_text}', '${review_date}')`;
+
+    connection.query(query, (error, results, fields) => {
+        if (error) {
+            console.error('Error creating review:', error.stack);
+            res.status(500).send('Error creating review');
+            return;
+        }
+        res.json({ message: 'Review created successfully', review_id: results.insertId });
+    });
+});
+
+app.get('/users', (req, res) => {
+    const userId = req.query.user_id; // Extract userId from request query parameters
+
+    // Ensure userId is defined before proceeding with the query
+    if (!userId) {
+        res.status(400).send('User ID is missing');
+        return;
+    }
+
+    const query = 'SELECT user_id, username, email, password FROM users WHERE user_id = ?';
+
+    connection.query(query, [userId], (error, results, fields) => {
+        if (error) {
+            console.error('Error fetching user: ' + error.stack);
+            res.status(500).send('Error fetching user');
+            return;
+        }
+        res.json(results);
+    });
+
 });
 
 
