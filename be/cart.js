@@ -1,3 +1,9 @@
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
 const userId = getUserIdFromURL();
 window.onload = function() {
     // Fetch cart items based on user_id
