@@ -7,10 +7,10 @@
         body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Set minimum height of the body */
+            min-height: 100vh;
         }
 
         header {
@@ -18,14 +18,14 @@
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             font-style: italic;
             margin: 0;
             font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header nav {
@@ -38,16 +38,16 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
-            transition: color 0.3s ease; /* Smooth color transition */
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #ffd700; /* Change color on hover */
+            color: #ffd700;
         }
 
         .search-bar {
             margin-bottom: 20px;
-            text-align: center; /* Center the search bar */
+            text-align: center;
         }
 
         .search-bar input[type="text"],
@@ -58,36 +58,36 @@
         }
 
         main {
-            flex-grow: 1; /* Allow main to grow */
-            overflow-y: auto; /* Add scroll to main */
+            flex-grow: 1;
+            overflow-y: auto;
         }
 
         .movie {
-            width: calc(15% - 20px); /* Adjusted width for six movies per row */
-            margin: 0 10px 20px; /* Bottom margin and small side margins */
+            width: calc(15% - 20px);
+            margin: 0 10px 20px;
             border: 1px solid #ccc;
-            padding: 10px; /* Adjusted padding */
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
-            border-radius: 8px; /* Rounded corners */
-            transition: transform 0.3s ease; /* Smooth transition on hover */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
         a {
-            text-decoration: none; /* Remove underline */
-            color: inherit; /* Use the default text color */
+            text-decoration: none;
+            color: inherit;
         }
 
         a:hover {
-            color: inherit; /* Use the default text color on hover */
+            color: inherit;
         }
         .movie img {
             width: 100%;
             height: auto;
-            margin-bottom: 5px; /* Adjusted margin */
-            border-radius: 8px; /* Rounded corners for images */
+            margin-bottom: 5px;
+            border-radius: 8px;
         }
 
         .movie-details {
@@ -95,11 +95,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding-top: 10px; /* Adjusted padding */
+            padding-top: 10px;
         }
 
         .movie p {
-            margin: 5px 0; /* Adjusted margin */
+            margin: 5px 0;
         }
 
         .movie p.price {
@@ -110,22 +110,22 @@
         .movie-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* Distribute evenly */
+            justify-content: space-between;
             padding: 20px 0;
-            max-height: calc(100vh - 200px); /* Extend height till footer */
+            max-height: calc(100vh - 200px);
         }
 
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: #fff; /* Changed footer background color */
-            color: #232f3e; /* Text color similar to movie details */
-            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+            background-color: #fff;
+            color: #232f3e;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .movie:hover {
-            transform: translateY(-5px); /* Move up on hover */
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .cart-button{
@@ -140,7 +140,7 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
         .logout-button {
             position: absolute;
@@ -154,10 +154,9 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
 
-        /* Change button color on hover */
         .logout-button,.cart-button:hover {
             background-color: #e0bb00;
         }
@@ -169,7 +168,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .close {
@@ -181,23 +180,22 @@
             cursor: pointer;
         }
         .reviews-button {
-            background-color: #000; /* Darker background color */
-            color: #fff; /* Text color */
+            background-color: #000;
+            color: #fff;
             padding: 10px 15px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Add transitions */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Change button color on hover */
         .reviews-button:hover {
-            background-color: #333; /* Darken on hover */
-            transform: translateY(-3px); /* Move up on hover */
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
         }
 
         .reviews-content {
@@ -219,49 +217,49 @@
         }
         @media screen and (max-width: 1200px) {
             .movie-container {
-                justify-content: space-around; /* Adjust spacing for smaller screens */
-                padding: 0 10px; /* Adjusted padding to center-align */
+                justify-content: space-around;
+                padding: 0 10px;
             }
             .movie {
                 margin: 10px;
-                flex-basis: calc(33.33% - 20px); /* Adjusted basis to ensure 3 movies per row */
-                max-width: calc(33.33% - 20px); /* Maintain a maximum width for consistency */
+                flex-basis: calc(33.33% - 20px);
+                max-width: calc(33.33% - 20px);
             }
         }
 
         @media screen and (max-width: 800px) {
             .movie-container {
-                justify-content: space-between; /* Distribute evenly for smaller screens */
-                padding: 0 15px; /* Adjusted padding to center-align */
+                justify-content: space-between;
+                padding: 0 15px;
             }
             .movie {
                 margin: 15px;
-                flex-basis: calc(33.33% - 30px); /* Adjusted basis to ensure 3 movies per row */
-                max-width: calc(33.33% - 30px); /* Maintain a maximum width for consistency */
+                flex-basis: calc(33.33% - 30px);
+                max-width: calc(33.33% - 30px);
             }
         }
 
         @media screen and (max-width: 600px) {
             .movie-container {
-                justify-content: space-between; /* Distribute evenly for smaller screens */
-                padding: 0 20px; /* Adjusted padding to center-align */
+                justify-content: space-between;
+                padding: 0 20px;
             }
             .movie {
                 margin: 20px;
-                flex-basis: calc(50% - 40px); /* Adjusted basis to ensure 2 movies per row */
-                max-width: calc(50% - 40px); /* Maintain a maximum width for consistency */
+                flex-basis: calc(50% - 40px);
+                max-width: calc(50% - 40px);
             }
         }
 
         @media screen and (max-width: 400px) {
             .movie-container {
-                justify-content: space-between; /* Distribute evenly for smaller screens */
-                padding: 0 25px; /* Adjusted padding to center-align */
+                justify-content: space-between;
+                padding: 0 25px;
             }
             .movie {
                 margin: 25px;
-                flex-basis: calc(100% - 50px); /* Full width for smaller screens */
-                max-width: calc(100% - 50px); /* Maintain a maximum width for consistency */
+                flex-basis: calc(100% - 50px);
+                max-width: calc(100% - 50px);
             }
         }
     </style>
@@ -280,10 +278,6 @@
             <button onclick="filterMovies()">Filter</button>
         </div>
         <div class="movie-container" id="movieList"></div>
-        <div id="reviewsModal" class="modal">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="reviewsContent" class="reviews-content"></div>
-        </div>
     </section>
 </main>
 

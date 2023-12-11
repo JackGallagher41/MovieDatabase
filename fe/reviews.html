@@ -7,25 +7,25 @@
         body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Set minimum height of the body */
-            font-family: Arial, sans-serif; /* Set default font */
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
         }
         header {
             background-color: #232f3e;
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             font-style: italic;
             margin: 0;
             font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header nav {
@@ -38,45 +38,45 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
-            transition: color 0.3s ease; /* Smooth color transition */
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #ffd700; /* Change color on hover */
+            color: #ffd700;
         }
 
         main {
-            flex-grow: 1; /* Allow main to grow */
-            overflow-y: auto; /* Add scroll to main */
+            flex-grow: 1;
+            overflow-y: auto;
             padding: 20px;
         }
         .rating-stars {
-            color: #ffd700; /* Set star color to yellow */
+            color: #ffd700;
         }
 
         .rating-stars span {
-            font-size: 20px; /* Adjust the size of the stars */
+            font-size: 20px;
         }
 
         .reviews {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* Distribute evenly */
+            justify-content: space-between;
             gap: 20px;
         }
 
         .review-item {
-            width: calc(30% - 20px); /* Adjusted width for three reviews per row */
+            width: calc(30% - 20px);
             background-color: #fff;
             border: 1px solid #ccc;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .review-item:hover {
-            transform: translateY(-5px); /* Move up on hover */
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .cart-button{
@@ -91,7 +91,7 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
         .logout-button {
             position: absolute;
@@ -105,10 +105,9 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
 
-        /* Change button color on hover */
         .logout-button,.cart-button:hover {
             background-color: #e0bb00;
         }
@@ -123,7 +122,6 @@
              transition: background-color 0.3s ease;
          }
 
-        /* Change button color on hover */
         .delete-button:hover {
             background-color: #d60000;
         }
@@ -131,9 +129,9 @@
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: #fff; /* Changed footer background color */
-            color: #232f3e; /* Text color similar to movie details */
-            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+            background-color: #fff;
+            color: #232f3e;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>

@@ -1,4 +1,9 @@
-// server.js
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -29,7 +34,7 @@ app.get('/movies', (req, res) => {
 app.get('/movies_with_id/:id', (req, res) => {
     const movieId = req.params.id;
 
-    // Use a parameterized query to prevent SQL injection
+    // Use a parameterized query
     connection.query(
         'SELECT * FROM movies WHERE movie_id = ?',
         [movieId],
@@ -131,7 +136,6 @@ app.post('/reviews', (req, res) => {
 app.get('/users', (req, res) => {
     const userId = req.query.user_id; // Extract userId from request query parameters
 
-    // Ensure userId is defined before proceeding with the query
     if (!userId) {
         res.status(400).send('User ID is missing');
         return;
@@ -242,7 +246,7 @@ app.delete('/carts/purchase/:user_id', (req, res) => {
 });
 app.delete('/reviews/:review_id', (req, res) => {
     const reviewId = req.params.review_id;
-    const userId = req.query.user_id; // Assuming the user_id is sent as a query parameter
+    const userId = req.query.user_id;
 
     // Check if both review ID and user ID are present
     if (!reviewId || !userId) {
