@@ -70,7 +70,7 @@ window.onload = function() {
                         additionalInfo.innerHTML = `Submitted by: ${user[0].username}, Date: ${formatDate(review.review_date)}`;
 
                         const content = document.createElement('p');
-                        content.textContent = `Review: ${review.review_text}`;
+                        content.textContent = `${review.review_text}`;
 
                         reviewItem.appendChild(ratingStars);
                         reviewItem.appendChild(title);
@@ -91,13 +91,14 @@ window.onload = function() {
         return date.toLocaleDateString('en-US', options);
     }
 
-    // Assign createReview to the window object
     window.createReview = function() {
-        const userId = document.getElementById('userId').value;
-        const movieId = urlParams.get('movie_id'); // Get movie ID from URL parameter
+        // Get user ID from URL parameter using getUserIdFromUrl function
+        const userId = getUserIdFromUrl();
+
+        const movieId = urlParams.get('movie_id');
         const rating = document.getElementById('rating').value;
         const reviewText = document.getElementById('reviewText').value;
-        const reviewDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // Format date as YYYY-MM-DD HH:MM:SS
+        const reviewDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         // Ensure all required fields are present
         if (!userId || !movieId || !rating || !reviewText) {
@@ -112,7 +113,7 @@ window.onload = function() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user_id: userId,
+                user_id: userId, // Use the retrieved user ID
                 movie_id: movieId,
                 rating: rating,
                 review_text: reviewText,
@@ -127,13 +128,11 @@ window.onload = function() {
             })
             .then(data => {
                 console.log('Review created:', data);
-                // Redirect back to the reviews page with the movie ID in the URL
-                window.location.href = `reviews.html?movie_id=${movieId}`;
+                window.location.href = `reviews.html?movie_id=${movieId}&user_id=${userId}`; // Redirect with both IDs
             })
             .catch(error => console.error('Error creating review:', error));
     };
 };
-
 function goToCart() {
     const userid = getUserIdFromUrl();
 
