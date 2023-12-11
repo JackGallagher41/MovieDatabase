@@ -107,3 +107,7 @@ function goToMain() {
         location.href=mainLink;
     }
 }
+function logout() {
+    // Redirect the user to login.html
+    window.location.href = 'login.html';
+}
