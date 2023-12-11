@@ -20,7 +20,7 @@ connection.query('CREATE DATABASE IF NOT EXISTS moviestore', function(error, res
 // Create Users Table
 connection.query(`CREATE TABLE IF NOT EXISTS moviestore.users (
   user_id INT AUTO_INCREMENT,
-  username VARCHAR(50) NOT NULL,
+  username VARCHAR(50) NOT NULL Unique,
   email VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
   PRIMARY KEY (user_id)
@@ -44,8 +44,8 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.movies (
     console.log('Table movies created successfully');
 });
 
-//Create Carts table
-connection.query(`CREATE TABLE IF NOT EXISTS moviestore.carts (
+//Create Cart table
+connection.query(`CREATE TABLE IF NOT EXISTS moviestore.cart (
     cart_id INT AUTO_INCREMENT,
     movie_id INT,
     user_id INT,
@@ -55,11 +55,11 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.carts (
     PRIMARY KEY (cart_id)
     )`, function(error, results, fields) {
     if (error) throw error;
-    console.log('Table reviews created successfully');
+    console.log('Table carts created successfully');
 });
 
-// Create Reviews Table
-connection.query(`CREATE TABLE IF NOT EXISTS moviestore.reviews (
+// Create Review Table
+connection.query(`CREATE TABLE IF NOT EXISTS moviestore.review (
     review_id INT AUTO_INCREMENT,
     movie_id INT,
     user_id INT,
@@ -71,7 +71,7 @@ connection.query(`CREATE TABLE IF NOT EXISTS moviestore.reviews (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
     )`, function(error, results, fields) {
     if (error) throw error;
-    console.log('Table reviews created successfully');
+    console.log('Table review created successfully');
 });
 
 // Insert Movies
