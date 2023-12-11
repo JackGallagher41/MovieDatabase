@@ -240,6 +240,55 @@ app.delete('/carts/purchase/:user_id', (req, res) => {
         res.status(200).send('All items purchased successfully');
     });
 });
+app.delete('/reviews/:review_id', (req, res) => {
+    const reviewId = req.params.review_id;
+    const userId = req.query.user_id; // Assuming the user_id is sent as a query parameter
+
+    // Check if both review ID and user ID are present
+    if (!reviewId || !userId) {
+        res.status(400).send('Review ID and User ID are required');
+        return;
+    }
+
+    // Check if the user matches the one who posted the review
+    connection.query(
+        'SELECT user_id FROM review WHERE review_id = ?',
+        [reviewId],
+        (error, results, fields) => {
+            if (error) {
+                console.error('Error checking review owner: ' + error.stack);
+                res.status(500).send('Error checking review owner');
+                return;
+            }
+
+            if (results.length === 0) {
+                res.status(404).send('Review not found');
+                return;
+            }
+
+            const reviewUserId = results[0].user_id;
+
+            if (userId !== reviewUserId.toString()) {
+                res.status(403).send('You are not authorized to delete this review');
+                return;
+            }
+
+            // If the user is authorized, proceed with the deletion
+            connection.query(
+                'DELETE FROM review WHERE review_id = ?',
+                [reviewId],
+                (deleteError, deleteResults, deleteFields) => {
+                    if (deleteError) {
+                        console.error('Error deleting review: ' + deleteError.stack);
+                        res.status(500).send('Error deleting review');
+                        return;
+                    }
+                    res.status(200).send('Review deleted successfully');
+                }
+            );
+        }
+    );
+});
 
 app.listen(3000, () => {
     console.log('App listening on port 3000');

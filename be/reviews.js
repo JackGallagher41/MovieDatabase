@@ -80,6 +80,19 @@ window.onload = function() {
                         reviewsSection.appendChild(reviewItem);
                     })
                     .catch(error => console.error('Error fetching user:', error));
+                // Create delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-button');
+                deleteButton.textContent = 'Delete Review';
+                deleteButton.onclick = function() {
+                    deleteReview(review.review_id, reviewItem);
+                };
+
+                // Append delete button to review item
+                reviewItem.appendChild(deleteButton);
+
+                // Append review item to reviews section
+                reviewsSection.appendChild(reviewItem);
             });
         })
         .catch(error => console.error('Error:', error));
@@ -131,6 +144,26 @@ window.onload = function() {
                 window.location.href = `reviews.html?movie_id=${movieId}&user_id=${userId}`; // Redirect with both IDs
             })
             .catch(error => console.error('Error creating review:', error));
+    };
+    window.deleteReview = function(reviewId, reviewItem) {
+        const userId = getUserIdFromUrl(); // Get user ID from URL parameter
+
+        if (!userId) {
+            console.error('User ID not found in URL');
+            return;
+        }
+
+        fetch(`http://localhost:3000/reviews/${reviewId}?user_id=${userId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                // Remove the review item if the deletion is successful
+                reviewsSection.removeChild(reviewItem);
+            })
+            .catch(error => console.error('Error deleting review:', error));
     };
 };
 function goToCart() {
