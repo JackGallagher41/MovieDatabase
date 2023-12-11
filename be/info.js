@@ -2,6 +2,7 @@ function getUserIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('user_id');
 }
+//function that displays the movie information
 window.onload = function() {
     // Get the movie_id from the URL parameter
     const params = new URLSearchParams(window.location.search);
@@ -47,6 +48,7 @@ window.onload = function() {
             addToCartButton.textContent = 'Add to Cart';
             addToCartButton.classList.add('add-to-cart-button');
 
+            //button used to add items into the users cart
             addToCartButton.addEventListener('click', function() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const requestOptions = {
@@ -89,6 +91,8 @@ window.onload = function() {
         })
         .catch(error => console.error('Error:', error));
 };
+
+//function to go to cart
 function goToCart() {
     const userid = getUserIdFromUrl();
 
@@ -100,6 +104,7 @@ function goToCart() {
     }
 }
 
+//function for home button
 function goToMain() {
     const userid = getUserIdFromUrl();
     if (userid) {
@@ -107,6 +112,8 @@ function goToMain() {
         location.href=mainLink;
     }
 }
+
+//function to logout
 function logout() {
     // Redirect the user to login.html
     window.location.href = 'login.html';

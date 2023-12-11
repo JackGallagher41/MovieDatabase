@@ -1,17 +1,24 @@
 <!DOCTYPE html>
+
+<! –– Ryan Hassell & Jack Gallagher ––>
+<! –– Database Management Systems ––>
+<! –– 12/11/2023 ––>
+<! –– Final Project ––>
+<! –– This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function. ––>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Movie Information</title>
-    <!-- Add any necessary styles or link to external stylesheets -->
+
     <style>
         body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Set minimum height of the body */
+            min-height: 100vh;
         }
 
         header {
@@ -19,14 +26,14 @@
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             font-style: italic;
             margin: 0;
             font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header nav {
@@ -89,7 +96,7 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
         .logout-button {
             position: absolute;
@@ -103,10 +110,10 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: background-color 0.3s ease;
         }
 
-        /* Change button color on hover */
+
         .logout-button,.cart-button:hover {
             background-color: #e0bb00;
         }
@@ -114,9 +121,9 @@
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: #fff; /* Changed footer background color */
-            color: #232f3e; /* Text color similar to movie details */
-            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+            background-color: #fff;
+            color: #232f3e;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
         }
 
     </style>

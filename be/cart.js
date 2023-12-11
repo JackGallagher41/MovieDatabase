@@ -1,7 +1,8 @@
 const userId = getUserIdFromURL();
+
+//creates the display for the cart page
 window.onload = function() {
     // Fetch cart items based on user_id
-    // Implement this function to get user_id from the URL
     if (!userId) {
         console.error('User ID is missing in the URL');
         return;
@@ -49,10 +50,14 @@ window.onload = function() {
         .catch(error => console.error('Error:', error));
 };
 
+//retrieves the ID from the url for user tracking
 function getUserIdFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get('user_id');
 }
+
+//a button implemented to purchase all in cart
+//deletes cart items and redirects user to home page
 purchaseButton.addEventListener('click', function() {
     const userId = getUserIdFromURL()
     // Implement your logic to delete all items for the user
@@ -75,9 +80,10 @@ purchaseButton.addEventListener('click', function() {
         })
         .catch(error => console.error('Error:', error));
 });
+
+//function for deleting a item in your cart
 function deleteCartItem(cartId) {
     // Implement the logic to delete the cart item with the specified cartId
-    // You can make a DELETE request to your server endpoint
     fetch(`http://localhost:3000/carts/${cartId}`, {
         method: 'DELETE',
         headers: {
@@ -96,12 +102,15 @@ function deleteCartItem(cartId) {
         .catch(error => console.error('Error:', error));
 }
 
+//function for directing to home page
 function goToMain() {
     if (userId) {
         const mainLink = `main.html?user_id=${userId}`
         location.href=mainLink;
     }
 }
+
+//logout button function
 function logout() {
     // Redirect the user to login.html
     window.location.href = 'login.html';

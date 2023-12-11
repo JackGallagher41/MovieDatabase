@@ -2,6 +2,7 @@ function getUserIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('user_id');
 }
+//code surrounding the display of main.html
 window.onload = function() {
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('user_id'); // Extract the user ID from the URL parameter
@@ -113,6 +114,7 @@ window.onload = function() {
         .catch(error => console.error('Error:', error));
 };
 
+//functionality for reviews
 function displayReview(reviewsSection, review, user) {
     const reviewItem = document.createElement('div');
     reviewItem.classList.add('review-item');
@@ -150,11 +152,8 @@ function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', options);
 }
-function closeModal() {
-    const modal = document.getElementById('reviewsModal');
-    modal.style.display = 'none';
-}
 
+//filters the movie using the filter bar
 function filterMovies() {
     const input = document.getElementById('searchInput');
     const filter = input.value.toUpperCase();
@@ -172,7 +171,7 @@ function filterMovies() {
     });
 }
 
-
+// function used for the cart button
 function goToCart() {
     const userid = getUserIdFromUrl();
 
@@ -183,6 +182,8 @@ function goToCart() {
         console.error('User_id not found in the URL');
     }
 }
+
+//function used for the logout button
 function logout() {
     // Redirect the user to login.html
     window.location.href = 'login.html';
