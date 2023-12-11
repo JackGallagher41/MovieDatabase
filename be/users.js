@@ -15,6 +15,22 @@ function registerUser() {
         return;
     }
 
+// Check if the username is already in use
+    fetch('http://localhost:3000/list-users')
+        .then(response => response.json())
+        .then(users => {
+            const matchedUser = users.find(user => user.username.toLowerCase() === username.toLowerCase());
+            if (matchedUser) {
+                alert("Username already in use");
+            } else {
+                // If username is not in use, send the user data to the backend
+                createUserOnServer(username, password, email);
+            }
+        })
+        .catch(error => console.error('Error checking existing users:', error));
+}
+
+function createUserOnServer(username, password, email) {
     // Send the user data to the backend
     fetch('http://localhost:3000/users', {
         method: 'POST',
