@@ -183,3 +183,7 @@ function goToCart() {
         console.error('User_id not found in the URL');
     }
 }
+function logout() {
+    // Redirect the user to login.html
+    window.location.href = 'login.html';
+}

@@ -63,7 +63,7 @@ app.post('/add-to-cart', (req, res) => {
     }
 
     // Check if the combination of movie_id and user_id already exists
-    connection.query('SELECT * FROM carts WHERE movie_id = ? AND user_id = ?', [movie_id, user_id], (error, results, fields) => {
+    connection.query('SELECT * FROM cart WHERE movie_id = ? AND user_id = ?', [movie_id, user_id], (error, results, fields) => {
         if (error) {
             console.error('Error checking cart: ' + error.stack);
             res.status(500).send('Error checking cart');
@@ -72,7 +72,7 @@ app.post('/add-to-cart', (req, res) => {
 
         if (results.length > 0) {
             // If the combination exists, update the quantity
-            connection.query('UPDATE carts SET quantity = quantity + 1 WHERE movie_id = ? AND user_id = ?', [movie_id, user_id], (updateError, updateResults, updateFields) => {
+            connection.query('UPDATE cart SET quantity = quantity + 1 WHERE movie_id = ? AND user_id = ?', [movie_id, user_id], (updateError, updateResults, updateFields) => {
                 if (updateError) {
                     console.error('Error updating cart: ' + updateError.stack);
                     res.status(500).send('Error updating cart');
@@ -82,7 +82,7 @@ app.post('/add-to-cart', (req, res) => {
             });
         } else {
             // If the combination doesn't exist, insert a new record
-            connection.query('INSERT INTO carts (movie_id, user_id, quantity) VALUES (?, ?, 1)', [movie_id, user_id], (insertError, insertResults, insertFields) => {
+            connection.query('INSERT INTO cart (movie_id, user_id, quantity) VALUES (?, ?, 1)', [movie_id, user_id], (insertError, insertResults, insertFields) => {
                 if (insertError) {
                     console.error('Error adding to cart: ' + insertError.stack);
                     res.status(500).send('Error adding to cart');
@@ -99,7 +99,7 @@ app.get('/reviews', (req, res) => {
     const movieId = req.query.movie_id; // Extract movie_id from query parameter
 
     // Construct the SQL query to fetch reviews filtered by movie ID
-    const query = 'SELECT review_id, movie_id, user_id, rating, review_text, review_date FROM reviews WHERE movie_id = ?';
+    const query = 'SELECT review_id, movie_id, user_id, rating, review_text, review_date FROM review WHERE movie_id = ?';
 
     connection.query(query, [movieId], (error, results, fields) => {
         if (error) {
@@ -115,7 +115,7 @@ app.get('/reviews', (req, res) => {
 app.post('/reviews', (req, res) => {
     const { user_id, movie_id, rating, review_text, review_date } = req.body;
 
-    const query = `INSERT INTO reviews (user_id, movie_id, rating, review_text, review_date) 
+    const query = `INSERT INTO review (user_id, movie_id, rating, review_text, review_date) 
                    VALUES (${user_id}, ${movie_id}, ${rating}, '${review_text}', '${review_date}')`;
 
     connection.query(query, (error, results, fields) => {
@@ -188,10 +188,10 @@ app.get('/carts/:user_id', (req, res) => {
     }
 
     const query = `
-        SELECT carts.cart_id, movies.title, movies.price, carts.quantity
-        FROM carts
-        JOIN movies ON carts.movie_id = movies.movie_id
-        WHERE carts.user_id = ?;
+        SELECT cart.cart_id, movies.title, movies.price, cart.quantity
+        FROM cart
+        JOIN movies ON cart.movie_id = movies.movie_id
+        WHERE cart.user_id = ?;
     `;
     console.log(query);
     connection.query(query, [userId], (error, results, fields) => {
@@ -209,7 +209,7 @@ app.delete('/carts/:cart_id', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
     const cartId = req.params.cart_id;
 
-    connection.query('DELETE FROM carts WHERE cart_id = ?', [cartId], (error, results, fields) => {
+    connection.query('DELETE FROM cart WHERE cart_id = ?', [cartId], (error, results, fields) => {
         if (error) {
             console.error('Error deleting item from cart: ' + error.stack);
             res.status(500).send('Error deleting item from cart');
@@ -228,7 +228,7 @@ app.delete('/carts/purchase/:user_id', (req, res) => {
         return;
     }
 
-    const query = 'DELETE FROM carts WHERE user_id = ?';
+    const query = 'DELETE FROM cart WHERE user_id = ?';
 
     connection.query(query, [userId], (error, results, fields) => {
         if (error) {

@@ -29,13 +29,13 @@ function registerUser() {
         })
         .then(data => {
             console.log('User created:', data);
-            window.location.href = '/fe/login.html';
+            window.location.href = 'login.html';
             // Handle success, maybe redirect or update UI
         })
         .catch(error => console.error('Error creating user:', error));
 }
 function redirectToRegister() {
-    window.location.href = '/fe/register.html';
+    window.location.href = 'register.html';
 }
 function login() {
     var username = document.getElementById("username").value;
