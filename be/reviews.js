@@ -1,3 +1,9 @@
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
 function getUserIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('user_id');
@@ -21,8 +27,6 @@ window.onload = function() {
             return response.json();
         })
         .then(reviews => {
-            // rest of your code for displaying reviews
-
             // Appending user_id to links
             const allLinks = document.querySelectorAll('a');
             allLinks.forEach(link => {
@@ -70,7 +74,7 @@ window.onload = function() {
                         additionalInfo.innerHTML = `Submitted by: ${user[0].username}, Date: ${formatDate(review.review_date)}`;
 
                         const content = document.createElement('p');
-                        content.textContent = `Review: ${review.review_text}`;
+                        content.textContent = `${review.review_text}`;
 
                         reviewItem.appendChild(ratingStars);
                         reviewItem.appendChild(title);
@@ -80,6 +84,19 @@ window.onload = function() {
                         reviewsSection.appendChild(reviewItem);
                     })
                     .catch(error => console.error('Error fetching user:', error));
+                // Create delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-button');
+                deleteButton.textContent = 'Delete Review';
+                deleteButton.onclick = function() {
+                    deleteReview(review.review_id, reviewItem);
+                };
+
+                // Append delete button to review item
+                reviewItem.appendChild(deleteButton);
+
+                // Append review item to reviews section
+                reviewsSection.appendChild(reviewItem);
             });
         })
         .catch(error => console.error('Error:', error));
@@ -91,13 +108,14 @@ window.onload = function() {
         return date.toLocaleDateString('en-US', options);
     }
 
-    // Assign createReview to the window object
     window.createReview = function() {
-        const userId = document.getElementById('userId').value;
-        const movieId = urlParams.get('movie_id'); // Get movie ID from URL parameter
+        // Get user ID from URL parameter using getUserIdFromUrl function
+        const userId = getUserIdFromUrl();
+
+        const movieId = urlParams.get('movie_id');
         const rating = document.getElementById('rating').value;
         const reviewText = document.getElementById('reviewText').value;
-        const reviewDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // Format date as YYYY-MM-DD HH:MM:SS
+        const reviewDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         // Ensure all required fields are present
         if (!userId || !movieId || !rating || !reviewText) {
@@ -112,7 +130,7 @@ window.onload = function() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user_id: userId,
+                user_id: userId, // Use the retrieved user ID
                 movie_id: movieId,
                 rating: rating,
                 review_text: reviewText,
@@ -127,13 +145,31 @@ window.onload = function() {
             })
             .then(data => {
                 console.log('Review created:', data);
-                // Redirect back to the reviews page with the movie ID in the URL
-                window.location.href = `reviews.html?movie_id=${movieId}`;
+                window.location.href = `reviews.html?movie_id=${movieId}&user_id=${userId}`; // Redirect with both IDs
             })
             .catch(error => console.error('Error creating review:', error));
     };
-};
+    window.deleteReview = function(reviewId, reviewItem) {
+        const userId = getUserIdFromUrl(); // Get user ID from URL parameter
 
+        if (!userId) {
+            console.error('User ID not found in URL');
+            return;
+        }
+
+        fetch(`http://localhost:3000/reviews/${reviewId}?user_id=${userId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                // Remove the review item if the deletion is successful
+                reviewsSection.removeChild(reviewItem);
+            })
+            .catch(error => console.error('Error deleting review:', error));
+    };
+};
 function goToCart() {
     const userid = getUserIdFromUrl();
 

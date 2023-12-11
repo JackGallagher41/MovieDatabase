@@ -1,3 +1,10 @@
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
+
 // THIS FILE BUILDS THE MYSQL DATABASE WHEN RUN
 // IF INCOMPATIBLE ERROR RUN THIS IN MYSQL: ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 const mysql = require('mysql');

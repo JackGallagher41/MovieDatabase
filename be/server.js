@@ -1,4 +1,9 @@
-// server.js
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
@@ -29,7 +34,7 @@ app.get('/movies', (req, res) => {
 app.get('/movies_with_id/:id', (req, res) => {
     const movieId = req.params.id;
 
-    // Use a parameterized query to prevent SQL injection
+    // Use a parameterized query
     connection.query(
         'SELECT * FROM movies WHERE movie_id = ?',
         [movieId],
@@ -131,7 +136,6 @@ app.post('/reviews', (req, res) => {
 app.get('/users', (req, res) => {
     const userId = req.query.user_id; // Extract userId from request query parameters
 
-    // Ensure userId is defined before proceeding with the query
     if (!userId) {
         res.status(400).send('User ID is missing');
         return;
@@ -239,6 +243,55 @@ app.delete('/carts/purchase/:user_id', (req, res) => {
 
         res.status(200).send('All items purchased successfully');
     });
+});
+app.delete('/reviews/:review_id', (req, res) => {
+    const reviewId = req.params.review_id;
+    const userId = req.query.user_id;
+
+    // Check if both review ID and user ID are present
+    if (!reviewId || !userId) {
+        res.status(400).send('Review ID and User ID are required');
+        return;
+    }
+
+    // Check if the user matches the one who posted the review
+    connection.query(
+        'SELECT user_id FROM review WHERE review_id = ?',
+        [reviewId],
+        (error, results, fields) => {
+            if (error) {
+                console.error('Error checking review owner: ' + error.stack);
+                res.status(500).send('Error checking review owner');
+                return;
+            }
+
+            if (results.length === 0) {
+                res.status(404).send('Review not found');
+                return;
+            }
+
+            const reviewUserId = results[0].user_id;
+
+            if (userId !== reviewUserId.toString()) {
+                res.status(403).send('You are not authorized to delete this review');
+                return;
+            }
+
+            // If the user is authorized, proceed with the deletion
+            connection.query(
+                'DELETE FROM review WHERE review_id = ?',
+                [reviewId],
+                (deleteError, deleteResults, deleteFields) => {
+                    if (deleteError) {
+                        console.error('Error deleting review: ' + deleteError.stack);
+                        res.status(500).send('Error deleting review');
+                        return;
+                    }
+                    res.status(200).send('Review deleted successfully');
+                }
+            );
+        }
+    );
 });
 
 app.listen(3000, () => {

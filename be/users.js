@@ -1,9 +1,15 @@
+//*** Ryan Hassell & Jack Gallagher
+//*** Database Management Systems
+//*** 12/11/2023
+//*** Final Project
+//*** This project is a movie store. This store is complete with a functioning cart, user system, login and registration, client-side error checking, reviews, and search function.
+
 function registerUser() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const email = document.getElementById('email').value;
 
-    // Ensure all values are defined before sending the request
+    // Client side error checking:
     if (!username || !password || !email) {
         console.error('Missing required fields for creating user');
         return;
@@ -30,7 +36,6 @@ function registerUser() {
         .then(data => {
             console.log('User created:', data);
             window.location.href = 'login.html';
-            // Handle success, maybe redirect or update UI
         })
         .catch(error => console.error('Error creating user:', error));
 }
@@ -41,7 +46,7 @@ function login() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
-    // Simple validation (you should implement server-side validation)
+    // Client side error checking
     if (username === "" || password === "") {
         alert("Please enter both username and password");
         return;
